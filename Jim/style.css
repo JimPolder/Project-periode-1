@@ -1,6 +1,8 @@
+/*background*/
 body {
     background-color: rgb(180, 0, 0);
   }
+  /*startbutton*/
   button {
     background-color: #795bff; /* Green */
     border: none;
@@ -14,9 +16,11 @@ body {
     padding: 75px 150px;
     font-size: 50px;
     position: relative;
-    left: 725px;
     top: 300px;
+    display: block;
+    margin: auto;
 }
 button:hover {
-      background-color: #555555; /* Dark grey */
+      background-color: #808080;
   }
+  /**/
