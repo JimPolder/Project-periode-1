@@ -1,7 +1,8 @@
 /*background*/
 body {
     background-color: rgb(180, 0, 0);
-  }
+    background-image: url('../IMG/supersigma.png');
+}
   /*startbutton*/
   button {
     background-color: #795bff; /* Green */
@@ -20,11 +21,11 @@ body {
     display: block;
     margin: auto;
 }
-button:hover {
+#strt:hover {
       background-color: #808080;
   }
-button:focus{
+#strt:focus{
   background-color: #a7a7a7;
   padding: 65px 135px;
-  
+}
   /**/
