@@ -4,7 +4,7 @@ body {
     background-image: url('../IMG/supersigma.png');
 }
   /*startbutton*/
-  str {
+  button {
     background-color: #795bff; /* Green */
     border: none;
     color: rgb(0, 0, 0);
@@ -12,7 +12,7 @@ body {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 30px;
+    font-size: 16px;
     border-radius: 12px;
     padding: 75px 150px;
     font-size: 50px;
