@@ -13,7 +13,6 @@ if (Buttongo) {
 } 
 
 function GO() {
-    console.log("GO");
     if (Gamestart == false){
       let right = 0,
       gomove = document.querySelector('.gobutton'),
@@ -42,7 +41,6 @@ function GO() {
 
 
 //start game
-console.log(Gamestart)
 if(Gamestart == true){
 
 
