@@ -24,18 +24,19 @@ function GO() {
         }
       gomove.style.right = right + "px";
 }, 5 );
-    }
-    //buttons
-    const buttons = ['Button 1', 'Button 2', 'Button 3'];
-
-  buttons.forEach(buttonText => {
-    const button = document.createElement('button');
-    button.className = 'centrebutton';
-    button.textContent = buttonText;
     
-    buttoncontainer.appendChild(button);
-});
+    //buttons
+      const buttons = ['Button 1', 'Button 2', 'Button 3'];
+
+      buttons.forEach(buttonText => {
+        const button = document.createElement('button');
+        button.className = 'centrebutton';
+        button.textContent = buttonText;
+        
+        buttoncontainer.appendChild(button);
+    });
     Gamestart = true
+  }
 
  }
 
