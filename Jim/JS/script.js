@@ -11,7 +11,6 @@ if (Buttongo) {
 } 
 
 function GO() {
-    
     if (Gamestart == 2) {
         let right = 0,
         gomove = document.querySelector('.gobutton'),
@@ -20,35 +19,33 @@ function GO() {
         timerId = setInterval(function() { 
             if (right++ > 750) {
                 clearInterval(timerId); 
-                gomove.innerText = "Restart"
+                gomove.innerText = "Restart";
                 gamestart2 = true; 
             }
             gomove.style.right = right + "px";
         }, 1);
         
-        // Create buttons
-        const buttons = ['Hoger', 'Lager', 'Precies'];
+        const buttons = ['Easy', 'Medium', 'Hard'];
 
         buttons.forEach(buttonText => {
             const button = document.createElement('button');
             button.className = 'centrebutton';
             button.textContent = buttonText;
             buttoncontainer.appendChild(button);
+
+            setTimeout(() => {
+                button.classList.add('fade-in');
+            }, 100);
         });
     }
     Gamestart = 1;
 
-//start game
     if (gamestart2 === true) { 
-      if(document.querySelector('.gobutton').innerText ="Restart"){
-        restartconfirm = confirm("Restart?")
-        if(restartconfirm){
-          location.reload();
+        if (document.querySelector('.gobutton').innerText === "Restart") {
+            const restartconfirm = confirm("Restart?");
+            if (restartconfirm) {
+                location.reload();
+            }
         }
-        
-      }
-
-
     }
 }
-

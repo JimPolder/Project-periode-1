@@ -1,12 +1,14 @@
 body {
   background-color: rgb(73, 73, 73);
 }
+
 .topbar {
   overflow: hidden;
   background-color: #333;
 }
+
 .gobutton {
-  background-color: #292929; /* Button background */
+  background-color: #292929;
   border: none;
   color: rgb(0, 0, 0);
   font-size: 50px;
@@ -17,26 +19,34 @@ body {
   margin: auto;
   padding: 15px 32px;
 }
+
 .button-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center items horizontally */
-  justify-content: center; /* Center items vertically */
-  height: 100vh; /* Full viewport height */
+  align-items: center; 
+  justify-content: center; 
+  height: 100vh; 
 }
+
 .centrebutton {
-  background-color: #292929; /* Button background */
+  background-color: #292929;
   border: none;
-  color: #fff; /* Button text color */
+  color: #fff; 
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   font-size: 30px;
   border-radius: 12px;
-  margin: 10px 0; /* Space between buttons */
-  cursor: pointer; /* Change cursor on hover */
-  transition: background-color 0.3s; /* Smooth transition */
+  margin: 10px 0; 
+  cursor: pointer; 
+  transition: opacity 0.5s ease-in; 
+  opacity: 0; 
 }
+
+.centrebutton.fade-in {
+  opacity: 1; 
+}
+
 .centrebutton:hover {
-  background-color: #444; /* Darker background on hover */
+  background-color: #444; 
 }
