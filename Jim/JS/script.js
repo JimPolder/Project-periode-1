@@ -1,50 +1,54 @@
-let Gamestart = false
+let Gamestart = 2;
 let Username = prompt("Wat is je naam?", "naam");
-const buttoncontainer = document.querySelector(".button-container")
-  
+let gamestart2 = false;
+const buttoncontainer = document.querySelector(".button-container");
 
 document.getElementById('usrid').innerHTML = Username || "NoName"; 
 const Buttongo = document.querySelector(".gobutton");
 
 if (Buttongo) {
-  Buttongo.onclick = function() { GO(); };
-
-  
+    Buttongo.onclick = function() { GO(); };
 } 
 
 function GO() {
-    if (Gamestart == false){
-      let right = 0,
-      gomove = document.querySelector('.gobutton'),
-      timerId = 0;
-
-      timerId = setInterval( function() { 
-      if( right++ > 750 ) {
-          clearInterval( timerId ); 
-        }
-      gomove.style.right = right + "px";
-}, 5 );
     
-    //buttons
-      const buttons = ['Button 1', 'Button 2', 'Button 3'];
+    if (Gamestart == 2) {
+        let right = 0,
+        gomove = document.querySelector('.gobutton'),
+        timerId = 0;
 
-      buttons.forEach(buttonText => {
-        const button = document.createElement('button');
-        button.className = 'centrebutton';
-        button.textContent = buttonText;
+        timerId = setInterval(function() { 
+            if (right++ > 750) {
+                clearInterval(timerId); 
+                gomove.innerText = "Restart"
+                gamestart2 = true; 
+            }
+            gomove.style.right = right + "px";
+        }, 1);
         
-        buttoncontainer.appendChild(button);
-    });
-    Gamestart = true
-  }
+        // Create buttons
+        const buttons = ['Hoger', 'Lager', 'Precies'];
 
- }
-
+        buttons.forEach(buttonText => {
+            const button = document.createElement('button');
+            button.className = 'centrebutton';
+            button.textContent = buttonText;
+            buttoncontainer.appendChild(button);
+        });
+    }
+    Gamestart = 1;
 
 //start game
-if(Gamestart == true){
+    if (gamestart2 === true) { 
+      if(document.querySelector('.gobutton').innerText ="Restart"){
+        restartconfirm = confirm("Restart?")
+        if(restartconfirm){
+          location.reload();
+        }
+        
+      }
 
 
-
-
+    }
 }
+
