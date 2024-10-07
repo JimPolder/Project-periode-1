@@ -1,28 +1,28 @@
 body {
   background-color: rgb(73, 73, 73);
-  margin: 0; /* Remove default margin */
-  overflow: hidden; /* Prevent scrolling */
-  height: 100vh; /* Full viewport height */
+  margin: 0;
+  overflow: hidden;
+  height: 100vh;
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
+  flex-direction: column;
 }
 
 .topbar {
   overflow: hidden;
   background-color: #333;
-  padding: 10px; /* Add padding for better appearance */
+  padding: 10px;
 }
 
 .chat-log {
   position: fixed;
-  top: 60px; /* Position below the top bar */
+  top: 60px;
   right: 20px;
   max-width: 200px;
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid #333;
   padding: 10px;
   overflow-y: auto;
-  max-height: calc(100vh - 120px); /* Adjust height based on other elements */
+  max-height: calc(100vh - 120px);
 }
 
 .gobutton {
@@ -31,13 +31,13 @@ body {
   color: rgb(0, 0, 0);
   font-size: 50px;
   border-radius: 12px;
-  position: absolute; /* Control positioning */
-  left: 50%; /* Start in the center */
-  transform: translateX(-50%); /* Center alignment */
-  top: 300px; /* Adjust top position as needed */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 300px;
   padding: 15px 32px;
-  padding: 75px 150px; /* Make button bigger */
-  transition: background-color 0.3s ease; /* Transition for hover effect */
+  padding: 75px 150px;
+  transition: background-color 0.3s ease;
 }
 
 .button-container {
@@ -45,7 +45,7 @@ body {
   flex-direction: column;
   align-items: center; 
   justify-content: center; 
-  flex-grow: 1; /* Allow this to take remaining space */
+  flex-grow: 1;
 }
 
 .healthbar {
@@ -53,7 +53,7 @@ body {
   bottom: 20px;
   left: 20px;
   font-size: 24px;
-  display: none; /* Initially hidden */
+  display: none;
 }
 
 .heart {
@@ -80,6 +80,6 @@ body {
 }
 
 .centrebutton:hover,
-.gobutton:hover { /* Add hover effect for .gobutton */
+.gobutton:hover {
   background-color: #444; 
 }
