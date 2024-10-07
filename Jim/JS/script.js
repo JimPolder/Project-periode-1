@@ -3,7 +3,7 @@ let Username = prompt("Wat is je naam?", "naam");
 let gamestart2 = false;
 const buttoncontainer = document.querySelector(".button-container");
 const hearts = document.querySelectorAll('.heart');
-const healthbar = document.querySelector('.healthbar'); // Select the health bar
+const healthbar = document.querySelector('.healthbar');
 let currentHearts = hearts.length;
 let diceVariable;
 let randomVariable;
@@ -11,31 +11,27 @@ let randomVariable;
 document.getElementById('usrid').innerHTML = Username || "NoName"; 
 const Buttongo = document.querySelector(".gobutton");
 
-// Start moving the GO button to the left when clicked
 Buttongo.onclick = function() { 
     moveGOButton(); 
 };
 
-// Function to move the button to the left
 function moveGOButton() {
-    let left = 50; // Start from the center (50% left)
+    let left = 50;
     const gomove = document.querySelector('.gobutton');
 
-    // Move button to the left
     const timerId = setInterval(function() { 
-        if (left <= 13) { // Stop when it reaches 10% from the left
-            clearInterval(timerId); 
-            gomove.innerText = "Restart"; // Change text to "Restart"
+        if (left <= 13) {
+            clearInterval(timerId);
+            gomove.innerText = "Restart";
             gomove.onclick = function() {
-                location.reload(); // Reload the page when clicked
+                location.reload();
             };
             gamestart2 = true; 
         }
-        gomove.style.left = left + "%"; // Move to the left
-        left--; // Decrement left position
+        gomove.style.left = left + "%";
+        left--; 
     }, 1);
 
-    // Show difficulty buttons after GO button is clicked
     const buttons = ['Easy', 'Medium', 'Hard'];
     buttons.forEach(buttonText => {
         const button = document.createElement('button');
@@ -55,11 +51,7 @@ function moveGOButton() {
 
 function handleDifficulty(difficulty) {
     const usernameElement = document.getElementById('usrid');
-    
-    // Show the health bar once a difficulty is chosen
     healthbar.style.display = 'block';
-
-    // Clear existing buttons
     buttoncontainer.innerHTML = '';
 
     switch (difficulty) {
@@ -84,35 +76,30 @@ function setupGame(min, max) {
         randomVariable = generateRandomNumber(min, max);
     } while (Math.abs(randomVariable - diceVariable) < 15);
 
-    // Display the dice emoji and number in the center above the buttons
     const diceDisplay = document.createElement('div');
     diceDisplay.style.position = 'fixed';
-    diceDisplay.style.top = '35%'; // Adjust top position to place it above buttons
+    diceDisplay.style.top = '35%';
     diceDisplay.style.left = '50%';
     diceDisplay.style.transform = 'translate(-50%, -50%)';
-    diceDisplay.style.fontSize = '48px'; // Set font size
-    diceDisplay.innerText = `🎲 ${diceVariable}`; // Use dice emoji with the number
+    diceDisplay.style.fontSize = '48px';
+    diceDisplay.innerText = `🎲 ${diceVariable}`;
     document.body.appendChild(diceDisplay);
 
-    // Create "Hoger" button
     const hogerButton = document.createElement('button');
     hogerButton.className = 'centrebutton';
     hogerButton.textContent = 'Hoger';
     buttoncontainer.appendChild(hogerButton);
 
-    // Create "Lager" button
     const lagerButton = document.createElement('button');
     lagerButton.className = 'centrebutton';
     lagerButton.textContent = 'Lager';
     buttoncontainer.appendChild(lagerButton);
 
-    // Create "Precies" button
     const preciesButton = document.createElement('button');
     preciesButton.className = 'centrebutton';
     preciesButton.textContent = 'Precies';
     buttoncontainer.appendChild(preciesButton);
 
-    // Add event listeners for the new buttons
     hogerButton.onclick = function() {
         checkResult('hoger');
     };
@@ -125,7 +112,6 @@ function setupGame(min, max) {
         checkResult('precies');
     };
 
-    // Fade in buttons
     [hogerButton, lagerButton, preciesButton].forEach(button => {
         setTimeout(() => {
             button.classList.add('fade-in');
@@ -149,7 +135,7 @@ function checkResult(choice) {
             message.innerText = `It was higher than ${diceVariable}!`;
         } else {
             currentHearts--;
-            hearts[currentHearts].style.visibility = 'hidden'; // Hide the heart
+            hearts[currentHearts].style.visibility = 'hidden';
             message.innerText = `You lost a heart!`;
         }
     } else if (choice === 'lager') {
@@ -157,7 +143,7 @@ function checkResult(choice) {
             message.innerText = `It was lower than ${diceVariable}!`;
         } else {
             currentHearts--;
-            hearts[currentHearts].style.visibility = 'hidden'; // Hide the heart
+            hearts[currentHearts].style.visibility = 'hidden';
             message.innerText = `You lost a heart!`;
         }
     } else if (choice === 'precies') {
@@ -165,28 +151,26 @@ function checkResult(choice) {
             message.innerText = `You guessed it right!`;
         } else {
             currentHearts--;
-            hearts[currentHearts].style.visibility = 'hidden'; // Hide the heart
+            hearts[currentHearts].style.visibility = 'hidden';
             message.innerText = `You lost a heart!`;
         }
     }
 
     chatLog.appendChild(message);
 
-    // Check if player is out of hearts
     if (currentHearts <= 0) {
         alert("Game Over! No hearts left.");
-        location.reload(); // Restart the game
+        location.reload();
     }
 }
 
-// Move the chat log down about 5%
 const chatLog = document.getElementById('chatLog');
 chatLog.style.position = 'fixed';
-chatLog.style.top = '65%'; // Move down by about 5%
+chatLog.style.top = '65%';
 chatLog.style.right = '20px';
 chatLog.style.maxWidth = '200px';
 chatLog.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
 chatLog.style.border = '1px solid #333';
 chatLog.style.padding = '10px';
 chatLog.style.overflowY = 'auto';
-chatLog.style.maxHeight = 'calc(100vh - 120px)'; // Adjust height based on other elements
+chatLog.style.maxHeight = 'calc(100vh - 120px)';
