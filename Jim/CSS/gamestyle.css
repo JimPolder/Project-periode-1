@@ -1,25 +1,25 @@
 body {
-  background-color: rgb(73, 73, 73);
+  background-color: #444;
   margin: 0;
   overflow: hidden;
   height: 100vh;
   display: flex;
   flex-direction: column;
+  color: white;
 }
 
 .topbar {
-  overflow: hidden;
   background-color: #333;
   padding: 10px;
 }
 
 .chat-log {
   position: fixed;
-  top: 60px;
+  top: 100px; 
   right: 20px;
   max-width: 200px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid #333;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #666;
   padding: 10px;
   overflow-y: auto;
   max-height: calc(100vh - 120px);
@@ -28,16 +28,19 @@ body {
 .gobutton {
   background-color: #292929;
   border: none;
-  color: rgb(0, 0, 0);
-  font-size: 50px;
+  color: white;
+  font-size: 30px;
   border-radius: 12px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 300px;
-  padding: 15px 32px;
-  padding: 75px 150px;
-  transition: background-color 0.3s ease;
+  position: fixed; 
+  right: 20px; 
+  top: 20px; 
+  padding: 15px 30px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.gobutton:hover {
+  background-color: #444;
+  transform: scale(1.05);
 }
 
 .button-container {
@@ -65,21 +68,20 @@ body {
   border: none;
   color: #fff; 
   padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 30px;
+  font-size: 20px;
   border-radius: 12px;
   margin: 10px 0; 
   cursor: pointer; 
-  transition: opacity 0.5s ease-in; 
+  transition: opacity 0.5s ease-in, transform 0.3s ease;
   opacity: 0; 
+  transform: translateY(10px);
 }
 
 .centrebutton.fade-in {
   opacity: 1; 
+  transform: translateY(0);
 }
 
-.centrebutton:hover,
-.gobutton:hover {
+.centrebutton:hover {
   background-color: #444; 
 }
