@@ -5,7 +5,7 @@ body {
 }
   /*startbutton*/
   button {
-    background-color: #795bff; /* Green */
+    background-color: #313131; /* Green */
     border: none;
     color: rgb(0, 0, 0);
     padding: 15px 32px;
@@ -20,6 +20,7 @@ body {
     top: 300px;
     display: block;
     margin: auto;
+
 }
 #strt:hover {
       background-color: #808080;

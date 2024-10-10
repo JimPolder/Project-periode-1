@@ -4,7 +4,7 @@ const hearts = document.querySelectorAll('.heart');
 const healthbar = document.querySelector('.healthbar');
 let currentHearts = hearts.length;
 let diceVariable;
-let targetNumber; // New variable for the number to guess
+let targetNumber; // Variable for the number to guess
 let diceDisplay;
 let lastGuess;
 let lastChoice;
@@ -15,19 +15,35 @@ document.getElementById('usrid').innerHTML = Username || "NoName";
 const Buttongo = document.querySelector(".gobutton");
 
 Buttongo.onclick = function() { 
-    startGame(); 
+    // Hide the GO button
+    Buttongo.style.display = 'none';
+    
+    // Start the game
+    startGame();
 };
 
-function startGame() {
-    const gomove = document.querySelector('.gobutton');
-    gomove.style.position = "fixed"; 
-    gomove.style.right = "20px"; 
-    gomove.style.top = "20px"; 
-    gomove.innerText = "Restart";
-    gomove.onclick = function() {
-        location.reload();
+function createRestartButton() {
+    const restartButton = document.createElement('button');
+    restartButton.innerText = "Restart";
+    restartButton.className = "restart-button"; // Use a specific class for styling
+    restartButton.style.position = "fixed";
+    restartButton.style.left = "10%"; // Position slightly off the left
+    restartButton.style.bottom = "10px"; // Position slightly above the bottom
+    restartButton.style.padding = "10px 20px"; // Match padding of the GO button
+    restartButton.style.fontSize = "16px"; // Match font size of the GO button
+    restartButton.style.border = "2px solid #777"; // Grey border
+    restartButton.style.backgroundColor = "#700"; // Dark red background
+    restartButton.style.color = "#FFFFFF"; // White text
+    restartButton.style.borderRadius = "5px"; // Rounded corners
+    restartButton.style.cursor = "pointer"; // Pointer cursor on hover
+    
+    restartButton.onclick = function() {
+        location.reload(); // Reloads the game
     };
+    document.body.appendChild(restartButton);
+}
 
+function startGame() {
     const buttons = ['Easy', 'Medium', 'Hard'];
     buttoncontainer.innerHTML = ''; 
 
@@ -50,23 +66,33 @@ function startGame() {
 function handleDifficulty(difficulty) {
     healthbar.style.display = 'flex';
     buttoncontainer.innerHTML = '';
+    
+    // Remove any previous username animation classes
+    const usernameElement = document.getElementById('usrid');
+    usernameElement.classList.remove('username-green', 'username-yellow', 'username-red');
 
     minRange = 1;
     switch (difficulty) {
         case 'Easy':
             maxRange = 20;
+            usernameElement.classList.add('username-green'); // Add green pulsing
             break;
         case 'Medium':
             maxRange = 50;
+            usernameElement.classList.add('username-yellow'); // Add yellow pulsing
             break;
         case 'Hard':
             maxRange = 100;
+            usernameElement.classList.add('username-red'); // Add red pulsing
             break;
         default:
             maxRange = 20; 
     }
 
     setupGame(minRange, maxRange);
+    
+    // Create the Restart button when a difficulty is chosen
+    createRestartButton();
 }
 
 function setupGame(min, max) {
