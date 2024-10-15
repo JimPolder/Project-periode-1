@@ -23,21 +23,45 @@ body {
   50% { color: red; }
 }
 
+@keyframes rainbow {
+  0% { color: red; }
+  14% { color: orange; }
+  28% { color: yellow; }
+  42% { color: green; }
+  57% { color: blue; }
+  71% { color: indigo; }
+  85% { color: violet; }
+  100% { color: red; }
+}
+
 .username-green {
-  animation: pulseGreen 2s infinite; /* Slower pulsing */
+  animation: pulseGreen 2s infinite; 
 }
 
 .username-yellow {
-  animation: pulseYellow 2s infinite; /* Slower pulsing */
+  animation: pulseYellow 2s infinite; 
 }
 
 .username-red {
-  animation: pulseRed 2s infinite; /* Slower pulsing */
+  animation: pulseRed 2s infinite; 
+}
+
+.dice-display {
+  animation: rainbow 3s infinite; 
+  font-size: 48px;
 }
 
 .topbar {
   background-color: #333;
   padding: 10px;
+}
+
+.win-counter {
+  position: fixed;
+  top: 110px; 
+  left: 20px;
+  font-size: 24px;
+  color: white;
 }
 
 .chat-log {
@@ -50,6 +74,8 @@ body {
   padding: 10px;
   overflow-y: auto;
   max-height: calc(100vh - 120px);
+  display: flex; 
+  flex-direction: column; 
 }
 
 .gobutton {
@@ -63,10 +89,10 @@ body {
   top: 50%; 
   transform: translate(-50%, -50%);
   padding: 15px 30px;
-  transition: background-color 0.3s ease, right 0.3s ease, top 0.3s ease; /* Smooth transition */
-  white-space: nowrap; /* Prevent text wrapping */
-  min-width: 150px; /* Minimum width to prevent expansion */
-  max-width: 200px; /* Maximum width to keep it from getting too wide */
+  transition: background-color 0.3s ease, right 0.3s ease, top 0.3s ease; 
+  white-space: nowrap; 
+  min-width: 150px; 
+  max-width: 200px; 
 }
 
 .gobutton:hover {

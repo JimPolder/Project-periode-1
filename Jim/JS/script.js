@@ -4,42 +4,42 @@ const hearts = document.querySelectorAll('.heart');
 const healthbar = document.querySelector('.healthbar');
 let currentHearts = hearts.length;
 let diceVariable;
-let targetNumber; // Variable for the number to guess
+let targetNumber;
 let diceDisplay;
 let lastGuess;
 let lastChoice;
 let minRange;
 let maxRange;
+let winCounter = 0;
 
-document.getElementById('usrid').innerHTML = Username || "NoName"; 
+document.querySelector('.usrclass').innerHTML = Username || "NoName"; 
 const Buttongo = document.querySelector(".gobutton");
+const chatLog = document.querySelector('.chat-log');
+const winCounterDisplay = document.querySelector('.win-counter');
 
-Buttongo.onclick = function() { 
-    // Hide the GO button
+Buttongo.addEventListener('click', function() { 
     Buttongo.style.display = 'none';
-    
-    // Start the game
     startGame();
-};
+});
 
 function createRestartButton() {
     const restartButton = document.createElement('button');
     restartButton.innerText = "Restart";
-    restartButton.className = "restart-button"; // Use a specific class for styling
+    restartButton.className = "restart-button"; 
     restartButton.style.position = "fixed";
-    restartButton.style.left = "10%"; // Position slightly off the left
-    restartButton.style.bottom = "10px"; // Position slightly above the bottom
-    restartButton.style.padding = "10px 20px"; // Match padding of the GO button
-    restartButton.style.fontSize = "16px"; // Match font size of the GO button
-    restartButton.style.border = "2px solid #777"; // Grey border
-    restartButton.style.backgroundColor = "#700"; // Dark red background
-    restartButton.style.color = "#FFFFFF"; // White text
-    restartButton.style.borderRadius = "5px"; // Rounded corners
-    restartButton.style.cursor = "pointer"; // Pointer cursor on hover
+    restartButton.style.left = "10%"; 
+    restartButton.style.bottom = "10px"; 
+    restartButton.style.padding = "10px 20px"; 
+    restartButton.style.fontSize = "16px"; 
+    restartButton.style.border = "2px solid #777"; 
+    restartButton.style.backgroundColor = "#700"; 
+    restartButton.style.color = "#FFFFFF"; 
+    restartButton.style.borderRadius = "5px"; 
+    restartButton.style.cursor = "pointer"; 
     
-    restartButton.onclick = function() {
-        location.reload(); // Reloads the game
-    };
+    restartButton.addEventListener('click', function() {
+        location.reload();
+    });
     document.body.appendChild(restartButton);
 }
 
@@ -57,9 +57,9 @@ function startGame() {
             button.classList.add('fade-in');
         }, 100);
 
-        button.onclick = function() {
+        button.addEventListener('click', function() {
             handleDifficulty(buttonText);
-        };
+        });
     });
 }
 
@@ -67,55 +67,49 @@ function handleDifficulty(difficulty) {
     healthbar.style.display = 'flex';
     buttoncontainer.innerHTML = '';
     
-    // Remove any previous username animation classes
-    const usernameElement = document.getElementById('usrid');
+    const usernameElement = document.querySelector('.usrclass');
     usernameElement.classList.remove('username-green', 'username-yellow', 'username-red');
 
     minRange = 1;
     switch (difficulty) {
         case 'Easy':
             maxRange = 20;
-            usernameElement.classList.add('username-green'); // Add green pulsing
+            usernameElement.classList.add('username-green');
             break;
         case 'Medium':
             maxRange = 50;
-            usernameElement.classList.add('username-yellow'); // Add yellow pulsing
+            usernameElement.classList.add('username-yellow');
             break;
         case 'Hard':
             maxRange = 100;
-            usernameElement.classList.add('username-red'); // Add red pulsing
+            usernameElement.classList.add('username-red');
             break;
         default:
             maxRange = 20; 
     }
 
     setupGame(minRange, maxRange);
-    
-    // Create the Restart button when a difficulty is chosen
     createRestartButton();
 }
 
 function setupGame(min, max) {
-    // Generate the target number and the initial dice variable
     targetNumber = generateRandomNumber(min, max);
     diceVariable = generateRandomNumber(min, max);
 
-    // Ensure targetNumber is different from diceVariable
     while (targetNumber === diceVariable) {
         targetNumber = generateRandomNumber(min, max);
     }
 
-    // Display the initial dice number
     if (diceDisplay) {
         diceDisplay.remove();
     }
 
     diceDisplay = document.createElement('div');
+    diceDisplay.className = 'dice-display';
     diceDisplay.style.position = 'fixed';
     diceDisplay.style.top = '35%';
     diceDisplay.style.left = '50%';
     diceDisplay.style.transform = 'translate(-50%, -50%)';
-    diceDisplay.style.fontSize = '48px';
     diceDisplay.innerText = `🎲 ${diceVariable}`;
     document.body.appendChild(diceDisplay);
 
@@ -124,7 +118,7 @@ function setupGame(min, max) {
 
 function createActionButtons() {
     const buttonNames = ['Hoger', 'Lager', 'Precies'];
-    buttoncontainer.innerHTML = ''; // Clear any previous buttons
+    buttoncontainer.innerHTML = '';
 
     buttonNames.forEach(buttonText => {
         const button = document.createElement('button');
@@ -136,64 +130,83 @@ function createActionButtons() {
             button.classList.add('fade-in');
         }, 100);
 
-        button.onclick = function() {
+        button.addEventListener('click', function() {
             buttonText === 'Precies' ? checkExactGuess() : checkResult(buttonText.toLowerCase());
-        };
+        });
     });
 }
 
 function checkExactGuess() {
     const guess = prompt("What number do you think it is?");
+    const message = document.createElement('div');
+
     if (guess !== null) {
         const guessedNumber = parseInt(guess, 10);
         if (!isNaN(guessedNumber) && guessedNumber >= minRange && guessedNumber <= maxRange) {
             lastGuess = guessedNumber;
             if (guessedNumber === targetNumber) {
-                alert("Congratulations! You guessed it right!");
-                resetGame();
+                winCounter++;
+                winCounterDisplay.innerText = `Winstreak: ${winCounter}`;
+                message.innerText = `Congratulations! You guessed it right with ${guessedNumber}! You have ${winCounter} wins!`;
+                alert(message.innerText);
+                chatLog.appendChild(message);
+                restoreHearts();
+                setupGame(minRange, maxRange);
+                showConfetti();
             } else {
                 currentHearts--;
                 hearts[currentHearts].style.visibility = 'hidden';
-                alert(`Wrong! The correct number was ${targetNumber}. You lost a heart!`);
+                message.innerText = `Wrong! The correct number was not ${guessedNumber}. You lost a heart!`;
+                chatLog.appendChild(message);
+                alert(message.innerText);
+                flashScreen('red');
                 checkGameOver();
             }
         } else {
             alert("Please enter a valid number within the range.");
         }
     }
+    chatLog.scrollTop = chatLog.scrollHeight;
+}
+
+function restoreHearts() {
+    currentHearts = hearts.length;
+    hearts.forEach(heart => heart.style.visibility = 'visible');
 }
 
 function checkResult(choice) {
-    const chatLog = document.getElementById('chatLog');
     const message = document.createElement('div');
-
-    // Check if the player's choice is correct based on the targetNumber
-    let isHigher = targetNumber > diceVariable; // Determine if the target is higher than the current diceVariable
+    let isHigher = targetNumber > diceVariable;
 
     lastChoice = choice;
 
     if (choice === 'hoger') {
         if (isHigher) {
             message.innerText = `Correct! The target number was higher than ${diceVariable}!`;
+            flashScreen('green');
         } else {
             currentHearts--;
             hearts[currentHearts].style.visibility = 'hidden';
             message.innerText = `Wrong! The target number was lower than ${diceVariable}! You lost a heart!`;
+            flashScreen('red');
         }
     } else if (choice === 'lager') {
         if (!isHigher) {
             message.innerText = `Correct! The target number was lower than ${diceVariable}!`;
+            flashScreen('green');
         } else {
             currentHearts--;
             hearts[currentHearts].style.visibility = 'hidden';
             message.innerText = `Wrong! The target number was higher than ${diceVariable}! You lost a heart!`;
+            flashScreen('red');
         }
     }
 
     chatLog.appendChild(message);
-    checkGameOver(); // Check if the game is over
-    updateDiceDisplay(); // Update the dice display
-    generateNewDice(); // Generate a new dice variable for the next round
+    checkGameOver();
+    updateDiceDisplay();
+    generateNewDice();
+    chatLog.scrollTop = chatLog.scrollHeight;
 }
 
 function checkGameOver() {
@@ -210,9 +223,8 @@ function updateDiceDisplay() {
 }
 
 function generateNewDice() {
-    // Generate a new dice number for the next round
     diceVariable = generateRandomNumber(minRange, maxRange);
-    updateDiceDisplay(); // Update the displayed dice number
+    updateDiceDisplay();
 }
 
 function resetGame() {
@@ -221,4 +233,68 @@ function resetGame() {
 
 function generateRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function flashScreen(color) {
+    const flash = document.createElement('div');
+    flash.style.position = 'fixed';
+    flash.style.top = 0;
+    flash.style.left = 0;
+    flash.style.width = '100%';
+    flash.style.height = '100%';
+    flash.style.backgroundColor = color;
+    flash.style.opacity = 0.7;
+    flash.style.transition = 'opacity 0.5s';
+    document.body.appendChild(flash);
+    setTimeout(() => {
+        flash.style.opacity = 0;
+        setTimeout(() => flash.remove(), 500);
+    }, 100);
+}
+
+function showConfetti() {
+    const canvas = document.createElement('canvas');
+    canvas.id = 'confetti-canvas';
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.position = 'fixed';
+    canvas.style.top = 0;
+    canvas.style.left = 0;
+    canvas.style.pointerEvents = 'none';
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    const particles = [];
+
+    for (let i = 0; i < 100; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 5 + 2,
+            color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+            speed: Math.random() * 3 + 1,
+            direction: Math.random() < 0.5 ? Math.random() * Math.PI : Math.random() * Math.PI + Math.PI,
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+            p.x += Math.cos(p.direction) * p.speed;
+            p.y += Math.sin(p.direction) * p.speed;
+            if (p.x < 0 || p.x > canvas.width || p.y < 0 || p.y > canvas.height) {
+                p.x = Math.random() * canvas.width;
+                p.y = Math.random() * canvas.height;
+            }
+        });
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+    setTimeout(() => {
+        document.body.removeChild(canvas);
+    }, 4000);
 }
