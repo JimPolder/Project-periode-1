@@ -12,14 +12,20 @@ let minRange;
 let maxRange;
 let winCounter = 0;
 
+const header1 = document.querySelector(".titleheader")
+const header2 = document.querySelector(".titleheader2")
+
 document.querySelector('.usrclass').innerHTML = Username || "NoName"; 
 const Buttongo = document.querySelector(".gobutton");
 const chatLog = document.querySelector('.chat-log');
 const winCounterDisplay = document.querySelector('.win-counter');
-
+winCounterDisplay.style.display = "none"
 
 Buttongo.addEventListener('click', function() { 
     Buttongo.style.display = 'none';
+    header1.style.display = "none";
+    header2.style.display = "none";
+    winCounterDisplay.style.display = "inline"
     startGame();
 });
 

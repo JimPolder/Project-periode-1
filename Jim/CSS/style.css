@@ -1,7 +1,7 @@
 /*background*/
 body {
     background-color: rgb(180, 0, 0);
-    background-image: url('../IMG/supersigma.png');
+    background-image: url("../IMG/supersigma.png");
 }
   /*startbutton*/
   button {
