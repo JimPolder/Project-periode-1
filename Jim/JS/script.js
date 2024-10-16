@@ -17,6 +17,7 @@ const Buttongo = document.querySelector(".gobutton");
 const chatLog = document.querySelector('.chat-log');
 const winCounterDisplay = document.querySelector('.win-counter');
 
+
 Buttongo.addEventListener('click', function() { 
     Buttongo.style.display = 'none';
     startGame();
@@ -44,6 +45,7 @@ function createRestartButton() {
 }
 
 function startGame() {
+    backgroundmusic()
     const buttons = ['Easy', 'Medium', 'Hard'];
     buttoncontainer.innerHTML = ''; 
 
@@ -75,14 +77,17 @@ function handleDifficulty(difficulty) {
         case 'Easy':
             maxRange = 20;
             usernameElement.classList.add('username-green');
+            easysound()
             break;
         case 'Medium':
             maxRange = 50;
             usernameElement.classList.add('username-yellow');
+            mediumsound()
             break;
         case 'Hard':
             maxRange = 100;
             usernameElement.classList.add('username-red');
+            hardsound()
             break;
         default:
             maxRange = 20; 
@@ -153,6 +158,7 @@ function checkExactGuess() {
                 restoreHearts();
                 setupGame(minRange, maxRange);
                 showConfetti();
+                winsound()
             } else {
                 currentHearts--;
                 hearts[currentHearts].style.visibility = 'hidden';
@@ -160,6 +166,8 @@ function checkExactGuess() {
                 chatLog.appendChild(message);
                 alert(message.innerText);
                 flashScreen('red');
+                guessound()
+                notcorrect()
                 checkGameOver();
             }
         } else {
@@ -184,21 +192,25 @@ function checkResult(choice) {
         if (isHigher) {
             message.innerText = `Correct! The target number was higher than ${diceVariable}!`;
             flashScreen('green');
+            correct()
         } else {
             currentHearts--;
             hearts[currentHearts].style.visibility = 'hidden';
             message.innerText = `Wrong! The target number was lower than ${diceVariable}! You lost a heart!`;
             flashScreen('red');
+            notcorrect()
         }
     } else if (choice === 'lower') {
         if (!isHigher) {
             message.innerText = `Correct! The target number was lower than ${diceVariable}!`;
             flashScreen('green');
+            correct()
         } else {
             currentHearts--;
             hearts[currentHearts].style.visibility = 'hidden';
             message.innerText = `Wrong! The target number was higher than ${diceVariable}! You lost a heart!`;
             flashScreen('red');
+            notcorrect()
         }
     }
 
