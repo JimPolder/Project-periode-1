@@ -1,4 +1,4 @@
-let Username = prompt("Wat is je naam?", "naam");
+let Username = prompt("What's your name?", "Name");
 const buttoncontainer = document.querySelector(".button-container");
 const hearts = document.querySelectorAll('.heart');
 const healthbar = document.querySelector('.healthbar');
@@ -117,7 +117,7 @@ function setupGame(min, max) {
 }
 
 function createActionButtons() {
-    const buttonNames = ['Hoger', 'Lager', 'Precies'];
+    const buttonNames = ['higher', 'lower', 'guess'];
     buttoncontainer.innerHTML = '';
 
     buttonNames.forEach(buttonText => {
@@ -131,7 +131,7 @@ function createActionButtons() {
         }, 100);
 
         button.addEventListener('click', function() {
-            buttonText === 'Precies' ? checkExactGuess() : checkResult(buttonText.toLowerCase());
+            buttonText === 'guess' ? checkExactGuess() : checkResult(buttonText.toLowerCase());
         });
     });
 }
@@ -180,7 +180,7 @@ function checkResult(choice) {
 
     lastChoice = choice;
 
-    if (choice === 'hoger') {
+    if (choice === 'higher') {
         if (isHigher) {
             message.innerText = `Correct! The target number was higher than ${diceVariable}!`;
             flashScreen('green');
@@ -190,7 +190,7 @@ function checkResult(choice) {
             message.innerText = `Wrong! The target number was lower than ${diceVariable}! You lost a heart!`;
             flashScreen('red');
         }
-    } else if (choice === 'lager') {
+    } else if (choice === 'lower') {
         if (!isHigher) {
             message.innerText = `Correct! The target number was lower than ${diceVariable}!`;
             flashScreen('green');
