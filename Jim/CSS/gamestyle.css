@@ -170,3 +170,13 @@ body {
   font-size: 100px;
   top: 150px
 }
+
+.flash-green {
+  animation: flashGreen 0.5s linear 2;
+}
+
+@keyframes flashGreen {
+  0% { color: green; }
+  50% { color: white; }
+  100% { color: green; }
+}

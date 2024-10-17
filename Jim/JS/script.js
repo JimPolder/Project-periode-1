@@ -158,24 +158,34 @@ function checkExactGuess() {
             if (guessedNumber === targetNumber) {
                 winCounter++;
                 winCounterDisplay.innerText = `Winstreak: ${winCounter}`;
+
+                // Flash effect logic
+                winCounterDisplay.classList.remove('flash-green'); // Remove the class
+                void winCounterDisplay.offsetWidth; // Trigger reflow
+                winCounterDisplay.classList.add('flash-green'); // Re-add the class
+
+                setTimeout(() => {
+                    winCounterDisplay.classList.remove('flash-green');
+                }, 2000); // Remove class after 2 seconds
+
                 message.innerText = `Congratulations! You guessed it right with ${guessedNumber}! You have ${winCounter} wins!`;
                 alert(message.innerText);
-                message.style.color = "blue"
+                message.style.color = "blue";
                 chatLog.appendChild(message);
                 restoreHearts();
                 setupGame(minRange, maxRange);
                 showConfetti();
-                winsound()
+                winsound();
             } else {
                 currentHearts--;
                 hearts[currentHearts].style.visibility = 'hidden';
                 message.innerText = `Wrong! The correct number was not ${guessedNumber}. You lost a heart!`;
-                message.style.color = "red"
+                message.style.color = "red";
                 chatLog.appendChild(message);
                 alert(message.innerText);
                 flashScreen('red');
-                guessound()
-                notcorrect()
+                guessound();
+                notcorrect();
                 checkGameOver();
             }
         } else {
