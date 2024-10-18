@@ -157,18 +157,18 @@ body {
 
 .titleheader{
   animation: rainbow2 3s infinite;
-  position: relative;
-  left: 670px;
+  position: fixed; 
+  left: 34%; 
   font-size: 100px;
   top: 115px
 }
 
 .titleheader2{
   animation: rainbow2 3s infinite;
-  position: relative;
-  left: 670px;
+  position: fixed; 
+  left: 34%; 
   font-size: 100px;
-  top: 150px
+  top: 550px;
 }
 
 .flash-green {
