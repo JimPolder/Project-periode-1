@@ -1,3 +1,5 @@
+//variabelen
+
 let Username = prompt("What's your name?", "Name");
 const buttoncontainer = document.querySelector(".button-container");
 const hearts = document.querySelectorAll('.heart');
@@ -20,6 +22,9 @@ const Buttongo = document.querySelector(".gobutton");
 const chatLog = document.querySelector('.chat-log');
 const winCounterDisplay = document.querySelector('.win-counter');
 winCounterDisplay.style.display = "none"
+
+
+//Begin game
 
 Buttongo.addEventListener('click', function() { 
     Buttongo.style.display = 'none';
@@ -147,6 +152,8 @@ function createActionButtons() {
     });
 }
 
+//gameplay
+
 function checkExactGuess() {
     const guess = prompt("What number do you think it is?");
     const message = document.createElement('div');
@@ -159,14 +166,14 @@ function checkExactGuess() {
                 winCounter++;
                 winCounterDisplay.innerText = `Winstreak: ${winCounter}`;
 
-                // Flash effect logic
-                winCounterDisplay.classList.remove('flash-green'); // Remove the class
-                void winCounterDisplay.offsetWidth; // Trigger reflow
-                winCounterDisplay.classList.add('flash-green'); // Re-add the class
+                
+                winCounterDisplay.classList.remove('flash-green'); 
+                void winCounterDisplay.offsetWidth; 
+                winCounterDisplay.classList.add('flash-green'); 
 
                 setTimeout(() => {
                     winCounterDisplay.classList.remove('flash-green');
-                }, 2000); // Remove class after 2 seconds
+                }, 2000);
 
                 message.innerText = `Congratulations! You guessed it right with ${guessedNumber}! You have ${winCounter} wins!`;
                 alert(message.innerText);
@@ -268,6 +275,8 @@ function resetGame() {
 function generateRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+//animations
 
 function flashScreen(color) {
     const flash = document.createElement('div');
